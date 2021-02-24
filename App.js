@@ -1,21 +1,47 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+import React from 'react';
+
+import ajax from './src/ajax';
+import { Text, View, StyleSheet } from 'react-native';
+import ActivityList from './src/components/ActivityList';
+
+
+
+class App extends React.Component {
+  state = {
+    activities: [],
+  };
+
+  async componentDidMount(){
+    const activities = await ajax.fetchInitialDeals();
+    this.setState({ activities });
+  }
+
+  render(){
+    return (
+      <View style={styles.container}>
+        {this.state.activities.length > 0 ? (
+          <ActivityList activities={this.state.activities} />
+        ) : (
+          <Text style={styles.header}> Hello Bakes</Text>
+        )
+      } 
+      </View>
   );
+  }
+  
 }
 
-const styles = StyleSheet.create({
+const styles= StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
+  header: {
+    fontSize: 40,
+    color: "blue",
+  }
 });
+
+export default App;
