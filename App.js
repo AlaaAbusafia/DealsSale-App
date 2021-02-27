@@ -11,7 +11,7 @@ import DealDetail from './src/components/DealDetail';
 class App extends React.Component {
   state = {
     deals: [],
-    currentdealId: null,
+    currentDealId: null,
   };
 
   async componentDidMount(){
@@ -19,26 +19,37 @@ class App extends React.Component {
     this.setState({ deals });
   }
 
-  setCurrentdeal = (dealId) => {
+  setCurrentDeal = (dealId) => {
     this.setState({
-      currentdealId: dealId
+      currentDealId: dealId
     });
   };
 
-  currentdeal = () =>{
+  unsetCurrentDeal = () => {
+    this.setState({
+      currentDealId: null
+    });
+  };
+
+  currentDeal = () =>{
     this.state.deals.find(
-      (deal) => deal.key === this.state.currentdealId
+      (deal) => deal.key === this.state.currentDealId
     );
   };
 
   render(){
 
-    if(this.state.currentdealId) {
-      return <DealDetail initialDealData= {this.currentdeal()} />
+    if(this.state.currentDealId) {
+      return (
+        <DealDetail 
+          initialDealData= {this.currentDeal()}
+          onBack = {this.unsetCurrentDeal}
+        />
+      );
     }
     if(this.state.deals.length > 0){
       return ( 
-        <DealsList deals={this.state.deals} onItemPress={this.setCurrentdeal} /> 
+        <DealsList deals={this.state.deals} onItemPress={this.setCurrentDeal} /> 
       );
       
     }

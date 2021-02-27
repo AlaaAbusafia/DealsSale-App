@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {View, Image, Text, StyleSheet } from 'react-native';
+import {View, Image, Text, StyleSheet, TouchableOpacityComponent } from 'react-native';
 import {priceDisplay} from '../util';
 
 import ajax from '../ajax';
@@ -9,6 +9,7 @@ class DealDetail extends Component {
     
     static propTypes = {
         deal: PropTypes.object.isRequired,
+        onBack: PropTypes.func.isRequired,
     };
 
     state = {
@@ -17,11 +18,9 @@ class DealDetail extends Component {
     
     async componentDidMount() {
         const fullDeal = await ajax.fetchDealDetail(this.state.deal.key);
-        console.log(fullDeal);
-
         this.setState({
             deal: fullDeal,
-        })
+        });
     }
 
     render() {
@@ -29,6 +28,9 @@ class DealDetail extends Component {
 
         return (
             <View style={styles.deals}>
+                <TouchableOpacityComponent onPress={this.props.onBack}>
+                    <Text style={styles.backLink}>Back</Text>
+                </TouchableOpacityComponent>
                 <Image source={{ uri: deal.media[0] }} style= {styles.image} />
                 <View style={styles.info}>
                     <Text style={styles.title}>{deal.title}</Text>
@@ -56,6 +58,10 @@ const styles= StyleSheet.create({
     deals : {
         marginHorizontal: 12,
         marginTop: 50,
+    },
+    backLink: {
+        marginBottom: 10,
+        color: '#22f',
     },
     image: {
         width: '100%',
@@ -91,7 +97,8 @@ const styles= StyleSheet.create({
         alignItems: 'center',
         marginTop: 15,
 
-    }
+    },
+    
 });
 
 export default DealDetail;
