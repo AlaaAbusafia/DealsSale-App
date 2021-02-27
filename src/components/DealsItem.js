@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import {priceDisplay} from '../util';
 
-class DealItem extends Component {
+class DealsItem extends Component {
     
     static propTypes = {
         deal: PropTypes.object.isRequired,
@@ -63,4 +63,4 @@ const styles= StyleSheet.create({
     },
 });
 
-export default DealItem;
+export default DealsItem;

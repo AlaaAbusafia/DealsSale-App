@@ -15,7 +15,7 @@ class App extends React.Component {
   };
 
   async componentDidMount(){
-    const deals = await ajax.fetchInitialdeals();
+    const deals = await ajax.fetchInitialDeals();
     this.setState({ deals });
   }
 
@@ -34,7 +34,7 @@ class App extends React.Component {
   render(){
 
     if(this.state.currentdealId) {
-      return <DealDetail initialdealData= {this.currentdeal()} />
+      return <DealDetail initialDealData= {this.currentdeal()} />
     }
     if(this.state.deals.length > 0){
       return ( 

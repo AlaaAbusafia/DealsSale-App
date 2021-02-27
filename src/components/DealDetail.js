@@ -12,15 +12,15 @@ class DealDetail extends Component {
     };
 
     state = {
-        deal: this.props.initialdealData,
+        deal: this.props.initialDealData,
     };
     
     async componentDidMount() {
-        const fulldeal = await ajax.fetchdealDetail(this.state.deal.key);
-        console.log(fulldeal);
+        const fullDeal = await ajax.fetchDealDetail(this.state.deal.key);
+        console.log(fullDeal);
 
         this.setState({
-            deal: fulldeal,
+            deal: fullDeal,
         })
     }
 

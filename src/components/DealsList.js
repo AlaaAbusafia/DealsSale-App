@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet, FlatList } from 'react-native';
 
-import DealItem from './DealItem';
+import DealsItem from './DealsItem';
 
 class DealsList extends Component {
 
@@ -19,7 +19,7 @@ class DealsList extends Component {
                 <FlatList
                     data={this.props.deals}
                     renderItem={ ({item}) => (
-                        <DealItem deal={item} onPress={this.props.onItemPress} />
+                        <DealsItem deal={item} onPress={this.props.onItemPress} />
                     )}
                 />
             </View>
