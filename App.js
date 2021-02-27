@@ -3,29 +3,48 @@ import React from 'react';
 
 import ajax from './src/ajax';
 import { Text, View, StyleSheet } from 'react-native';
-import ActivityList from './src/components/ActivityList';
+import DealsList from './src/components/DealsList';
+import DealDetail from './src/components/DealDetail';
 
 
 
 class App extends React.Component {
   state = {
-    activities: [],
+    deals: [],
+    currentdealId: null,
   };
 
   async componentDidMount(){
-    const activities = await ajax.fetchInitialDeals();
-    this.setState({ activities });
+    const deals = await ajax.fetchInitialdeals();
+    this.setState({ deals });
   }
 
+  setCurrentdeal = (dealId) => {
+    this.setState({
+      currentdealId: dealId
+    });
+  };
+
+  currentdeal = () =>{
+    this.state.deals.find(
+      (deal) => deal.key === this.state.currentdealId
+    );
+  };
+
   render(){
+
+    if(this.state.currentdealId) {
+      return <DealDetail initialdealData= {this.currentdeal()} />
+    }
+    if(this.state.deals.length > 0){
+      return ( 
+        <DealsList deals={this.state.deals} onItemPress={this.setCurrentdeal} /> 
+      );
+      
+    }
     return (
       <View style={styles.container}>
-        {this.state.activities.length > 0 ? (
-          <ActivityList activities={this.state.activities} />
-        ) : (
-          <Text style={styles.header}> Hello Bakes</Text>
-        )
-      } 
+          <Text style={styles.header}>Deals</Text>
       </View>
   );
   }
