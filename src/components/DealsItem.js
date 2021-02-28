@@ -15,11 +15,11 @@ class DealsItem extends Component {
     };
 
     render() {
-        const {deal} = this.props;
+        const { deal } = this.props;
 
         return (
             <TouchableOpacity style={styles.deals} onPress={this.handlePress}>
-                <Image style= {styles.image} source={{ uri: deal.media[0] }} />
+                <Image style= {styles.image} source= {{ uri: deal.media[0] }} />
                 <View style={styles.info}>
                     <Text style={styles.title}>{deal.title}</Text>
                     <View style={styles.footer}>
