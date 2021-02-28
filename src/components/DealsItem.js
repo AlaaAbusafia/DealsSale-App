@@ -19,7 +19,10 @@ class DealsItem extends Component {
 
         return (
             <TouchableOpacity style={styles.deals} onPress={this.handlePress}>
-                <Image style= {styles.image} source= {{ uri: deal.media[0] }} />
+                <Image 
+                    source= {{ uri: deal.media[0] }} 
+                    style= {styles.image} 
+                />
                 <View style={styles.info}>
                     <Text style={styles.title}>{deal.title}</Text>
                     <View style={styles.footer}>
@@ -60,6 +63,10 @@ const styles= StyleSheet.create({
     },
     cause: {
         flex: 2,
+    },
+    price: {
+        flex: 1,
+        textAlign: 'right',
     },
 });
 

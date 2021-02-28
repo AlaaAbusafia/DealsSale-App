@@ -24,7 +24,7 @@ class App extends React.Component {
     const width = Dimensions.get('window').width - 100;
      Animated.timing(this.titleX, {
        toValue: direction * (width/2),
-       duration: 1000,
+       duration: 500,
        easing: Easing.ease
       })
       .start(( {finished} ) => {
