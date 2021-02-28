@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
+    ScrollView,
     View, 
     Image, 
     Text, 
@@ -85,7 +86,7 @@ class DealDetail extends Component {
         const { deal } = this.state;
 
         return (
-            <View style={styles.deals}>
+            <ScrollView style={styles.deals}>
                 <TouchableOpacity onPress={this.props.onBack}>
                     <Text style={styles.backLink}>Back</Text>
                 </TouchableOpacity>
@@ -114,7 +115,7 @@ class DealDetail extends Component {
                     <Text>{deal.description}</Text>
                 </View>
                 <Button title="Buy this deal" onPress= {this.openDealUrl} />
-            </View>
+            </ScrollView>
             
         );
     }
@@ -123,6 +124,7 @@ class DealDetail extends Component {
 const styles= StyleSheet.create({
     deals : {
         marginHorizontal: 12,
+        marginBottom: 12,
        
     },
     backLink: {
