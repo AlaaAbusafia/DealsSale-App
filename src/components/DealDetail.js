@@ -7,7 +7,9 @@ import {
     TouchableOpacity, 
     Animated, 
     PanResponder, 
-    Dimensions,
+    Dimensions,,
+    Button,
+    Linking,
     StyleSheet 
 } from 'react-native';
 
@@ -76,6 +78,9 @@ class DealDetail extends Component {
         });
     }
 
+    openDealUrl = () => {
+        Linking.openURL(this.state.deal.url);
+    }
     render() {
         const { deal } = this.state;
 
@@ -108,7 +113,7 @@ class DealDetail extends Component {
                 <View>
                     <Text>{deal.description}</Text>
                 </View>
-
+                <Button title="Buy this deal" onPress= {this.openDealUrl} />
             </View>
             
         );
