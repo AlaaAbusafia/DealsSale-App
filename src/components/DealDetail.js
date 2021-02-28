@@ -31,7 +31,7 @@ class DealDetail extends Component {
                 <TouchableOpacityComponent onPress={this.props.onBack}>
                     <Text style={styles.backLink}>Back</Text>
                 </TouchableOpacityComponent>
-                <Image source={{ uri: deal.media[0] }} style= {styles.image} />
+                <Image source= {{uri: deal.media[0]}} style={{ width: 40, height: 40 }} />
                 <View style={styles.info}>
                     <Text style={styles.title}>{deal.title}</Text>
                     <View style={styles.footer}>
@@ -57,11 +57,12 @@ class DealDetail extends Component {
 const styles= StyleSheet.create({
     deals : {
         marginHorizontal: 12,
-        marginTop: 50,
+       
     },
     backLink: {
         marginBottom: 10,
-        color: '#22f',
+        color: '#0645ad',
+        marginLeft: 10,
     },
     image: {
         width: '100%',
@@ -69,19 +70,19 @@ const styles= StyleSheet.create({
         backgroundColor: '#ccc',
     },
     info: {
-        padding: 10,
-        backgroundColor: '#fff',
-        borderColor: '#aaa',
-        borderWidth: 1,
-        borderTopWidth: 0,
+        alignItems: 'center',
     },
     title: {
         fontSize: 16,
         fontWeight: 'bold',
-        marginBottom: 5,
+        backgroundColor: 'rgba(237, 149, 45, 0.4)',
+        padding: 10,
     },
     footer: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginTop: 15,
     },
     cause: {
         flex: 2,

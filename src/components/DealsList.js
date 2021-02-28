@@ -18,7 +18,7 @@ class DealsList extends Component {
             <View style={styles.list} >
                 <FlatList
                     data={this.props.deals}
-                    renderItem={ ({item}) => (
+                    renderItem={ ({ item }) => (
                         <DealsItem deal={item} onPress={this.props.onItemPress} />
                     )}
                 />

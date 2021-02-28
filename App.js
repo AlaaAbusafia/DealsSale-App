@@ -2,7 +2,7 @@
 import React from 'react';
 
 import ajax from './src/ajax';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, Animated, Easing, Dimensions, StyleSheet} from 'react-native';
 import DealsList from './src/components/DealsList';
 import DealDetail from './src/components/DealDetail';
 import SearchBar from './src/components/SearchBar';
@@ -10,6 +10,9 @@ import SearchBar from './src/components/SearchBar';
 
 
 class App extends React.Component {
+
+  titleX = new Animated.Value(0);
+
   state = {
     deals: [],
     dealsFromSearch: [],
@@ -17,7 +20,24 @@ class App extends React.Component {
     
   };
 
+  animateLogo = (direction = 1) =>{
+    const width = Dimensions.get('window').width - 100;
+     Animated.timing(this.titleX, {
+       toValue: direction * (width/2),
+       duration: 1000,
+       easing: Easing.ease
+      })
+      .start(( {finished} ) => {
+        if (finished) {
+          this.animateLogo( -1 * direction ); 
+        }
+        
+      });
+  };
+
   async componentDidMount(){
+
+    this.animateLogo();
     const deals = await ajax.fetchInitialDeals();
     this.setState({ deals });
   }
@@ -77,9 +97,9 @@ class App extends React.Component {
       );
     }
     return (
-      <View style={styles.container}>
+      <Animated.View style={[{ left: this.titleX}, styles.container]}>
           <Text style={styles.header}>Deals</Text>
-      </View>
+      </Animated.View>
   );
   }
   
