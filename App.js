@@ -17,6 +17,7 @@ class App extends React.Component {
     deals: [],
     dealsFromSearch: [],
     currentDealId: null,
+    activeSearchText: ' ',
     
   };
 
@@ -47,7 +48,7 @@ class App extends React.Component {
     if(searchText){
        dealsFromSearch = await ajax.fetchSearchResults(searchText);
     }
-    this.setState({dealsFromSearch});
+    this.setState({ dealsFromSearch, activeSearchText: searchText });
   };
 
 
@@ -91,7 +92,7 @@ class App extends React.Component {
     if(searchDealsToDisplay.length > 0){
       return ( 
         <View style={styles.main}>
-          <SearchBar searchDeals={this.searchDeals}  />
+          <SearchBar searchDeals={this.searchDeals} initialSearchText= {this.props.activeSearchText}  />
           <DealsList deals={this.state.deals} onItemPress={this.setCurrentDeal} /> 
         </View>
       );
