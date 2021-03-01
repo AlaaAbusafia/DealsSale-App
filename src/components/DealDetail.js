@@ -8,7 +8,7 @@ import {
     TouchableOpacity, 
     Animated, 
     PanResponder, 
-    Dimensions,,
+    Dimensions,
     Button,
     Linking,
     StyleSheet 
@@ -19,6 +19,16 @@ import ajax from '../ajax';
 
 class DealDetail extends Component {
     
+    static propTypes = {
+        initialDealData: PropTypes.object.isRequired,
+        onBack: PropTypes.func.isRequired,
+    };
+
+    state = {
+        deal: this.props.initialDealData,
+        imageIndex: 0,
+    };
+
     imageX = new Animated.Value(0);
     
     imagePanResponder = PanResponder.create({
@@ -61,23 +71,14 @@ class DealDetail extends Component {
         });
         
     }
-
-    static propTypes = {
-        initialDealData: PropTypes.object.isRequired,
-        onBack: PropTypes.func.isRequired,
-    };
-
-    state = {
-        deal: this.props.initialDealData,
-        imageIndex: 0,
-    };
     
-    async componentDidMount() {
+    async componentDidMount(){
         const fullDeal = await ajax.fetchDealDetail(this.state.deal.key);
         this.setState({
             deal: fullDeal,
         });
     }
+        
 
     openDealUrl = () => {
         Linking.openURL(this.state.deal.url);
